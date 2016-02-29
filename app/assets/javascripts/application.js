@@ -12,5 +12,20 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
 //= require_tree .
+
+$(document).ready(function () {
+  var $pass  = $('#password');
+  var $pass1 = $('#p_match');
+  var $signUpButton = $('#sign-up')
+
+  $('#p_match, #password').on('keyup', function(e) {
+    if ($pass.val() === '' || $pass1.val() === '') {
+      $signUpButton.prop('disabled', true);
+    } else if ($pass.val() === $pass1.val()) {
+      $signUpButton.removeAttr('disabled');
+    } else {
+      $signUpButton.prop('disabled', true);
+    }
+  })
+});

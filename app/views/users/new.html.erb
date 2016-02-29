@@ -1,0 +1,9 @@
+<%= form_for @user do |f| %>
+  <%= f.label :email, "Email Address" %>
+  <%= f.text_field :email %>
+  <%= f.label :password %>
+  <%= f.password_field :password, id: 'password' %>
+  <%= f.label :password_match, "Confirm Password" %>
+  <%= f.password_field :password_match, id: 'p_match' %>
+  <%= f.submit 'Sign Up', disabled: true, id: 'sign-up'%>
+<% end %>

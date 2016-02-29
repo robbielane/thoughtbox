@@ -1,0 +1,15 @@
+<h1>Links</h1>
+<%= form_for :new_link, url: links_path, html: {class: 'new_link'} do |f| %>
+  <h5>Add Link</h5>
+  <%= f.label :url %>
+  <%= f.text_field :url %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  <%= f.button 'Submit', class: 'btn-sm btn btn-default' %>
+<% end %>
+
+<div class="links">
+  <% @links.each do |link| %>
+    <%= link_to link.title, link.url %>
+  <% end %>
+</div>
