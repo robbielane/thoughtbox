@@ -10,10 +10,10 @@
 <input type='text' id='search' placeholder="Search">
 <table class="table">
   <tr>
-    <th>Link</th>
+    <th>Link <small>(<a href="#" class='sortByTitle'>sort</a>)</small></th>
     <th>Edit</th>
     <th>Delete</th>
-    <th tspan='2'></th>
+    <th>Read <small>(<a href="#" class='sortByStatus'>sort</a>)</small></th>
   </tr>
   <% @links.each do |link| %>
     <tr data-id='<%= link.id %>' data-title='<%= link.title %>' class='<%= link.read %> link'>

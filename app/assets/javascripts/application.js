@@ -19,6 +19,8 @@ $(document).ready(function () {
   passwordConfirmation();
   linkReadStaus();
   search();
+  sortByTitle();
+  sortByStatus();
 });
 
 var passwordConfirmation = function () {
@@ -39,6 +41,7 @@ var passwordConfirmation = function () {
 
 var linkReadStaus = function () {
   $('tr').delegate('#read', 'click', function(e) {
+    e.preventDefault();
     $link = $(this).closest('tr');
     toggleReadStatus($link.data('id'));
     $link.toggleClass('true');
@@ -62,13 +65,47 @@ var toggleReadStatus = function (id) {
 
 var search = function() {
   $('#search').on('keyup', function (e) {
-    var searchTerm = $('#search').val();
+    var searchTerm = $('#search').val().toLowerCase();
     var $links = $('.link');
     $links.hide();
     var filteredLinks = _.filter($links, function(link) {
-      return $(link).data('title').includes(searchTerm);
+      return $(link).data('title').toLowerCase().includes(searchTerm);
     });
     $(filteredLinks).show();
     if (!searchTerm) { $links.show(); }
+  });
+};
+
+var sortByTitle = function () {
+  $('.sortByTitle').on('click', function(e) {
+    e.preventDefault();
+    var $links = $('.link');
+    sortedLinks = $links.sort(function (a,b) {
+      a = $(a).data('title').toLowerCase();
+      b = $(b).data('title').toLowerCase();
+      if (a < b) return -1;
+      if (a > b) return 1;
+      return 0;
+    });
+    $links.remove();
+    $('.table').append(sortedLinks);
+    linkReadStaus();
+  });
+};
+
+var sortByStatus = function () {
+  $('.sortByStatus').on('click', function(e) {
+    e.preventDefault();
+    var $links = $('.link');
+    sortedLinks = $links.sort(function (a,b) {
+      a = $(a).hasClass('true');
+      b = $(b).hasClass('true');
+      if (a < b) return -1;
+      if (a > b) return 1;
+      return 0;
+    });
+    $links.remove();
+    $('.table').append(sortedLinks);
+    linkReadStaus();
   });
 };
