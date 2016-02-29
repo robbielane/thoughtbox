@@ -15,9 +15,14 @@
 //= require_tree .
 
 $(document).ready(function () {
+  passwordConfirmation();
+  linkReadStaus();
+});
+
+var passwordConfirmation = function () {
   var $pass  = $('#password');
   var $pass1 = $('#p_match');
-  var $signUpButton = $('#sign-up')
+  var $signUpButton = $('#sign-up');
 
   $('#p_match, #password').on('keyup', function(e) {
     if ($pass.val() === '' || $pass1.val() === '') {
@@ -27,5 +32,28 @@ $(document).ready(function () {
     } else {
       $signUpButton.prop('disabled', true);
     }
-  })
-});
+  });
+};
+
+var linkReadStaus = function () {
+  $('tr').delegate('#read', 'click', function(e) {
+    $link = $(this).closest('tr');
+    toggleReadStatus($link.data('id'));
+    $link.toggleClass('true');
+    if ($link.hasClass('true')) {
+      $(this).text('Mark as Unread');
+    } else {
+      $(this).text('Mark as Read');
+    }
+  });
+};
+
+var toggleReadStatus = function (id) {
+  $.ajax({
+    type: 'PATCH',
+    url: '/api/v1/links/' + id + '/toggle_read',
+    success: function(link) {
+      console.log("success")
+    }
+  });
+};

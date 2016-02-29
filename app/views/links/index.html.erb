@@ -1,5 +1,5 @@
 <h1>Links</h1>
-<%= form_for :new_link, url: links_path, html: {class: 'new_link'} do |f| %>
+<%= form_for :link, url: links_path, html: {class: 'new_link'} do |f| %>
   <h5>Add Link</h5>
   <%= f.label :url %>
   <%= f.text_field :url %>
@@ -8,8 +8,22 @@
   <%= f.button 'Submit', class: 'btn-sm btn btn-default' %>
 <% end %>
 
-<div class="links">
+<table class="table">
+  <tr>
+    <th>Link</th>
+    <th>Edit</th>
+    <th>Delete</th>
+  </tr>
   <% @links.each do |link| %>
-    <%= link_to link.title, link.url %>
+    <tr data-id='<%= link.id %>' class='<%= link.read %>'>
+      <td><%= link_to link.title, link.url %></td>
+      <td><%= link_to 'Edit', edit_link_path(link) %></td>
+      <td><%= link_to 'Delete', link_path(link), method: 'delete' %></td>
+      <% if link.read %>
+        <td><%= link_to 'Mark as Unread', '#', id: 'read' %></td>
+      <% else %>
+        <td><%= link_to 'Mark as Read', '#', id: 'read' %></td>
+      <% end %>
+    </tr>
   <% end %>
-</div>
+</table>

@@ -18,11 +18,19 @@
  @import "bootstrap-sprockets";
  @import "bootstrap";
 
- .new_link {
-   border: 1px solid #ccc;
-   padding: 15px;
+.new_link {
+  border: 1px solid #ccc;
+  padding: 15px;
 
-   input {
-     width: 30%;
-   }
- }
+  input {
+   width: 30%;
+  }
+}
+
+
+.true {
+  background-color: #fce4ec;
+  a {
+    color: #999;
+  }
+}
