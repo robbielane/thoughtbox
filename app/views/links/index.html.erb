@@ -7,15 +7,16 @@
   <%= f.text_field :title %>
   <%= f.button 'Submit', class: 'btn-sm btn btn-default' %>
 <% end %>
-
+<input type='text' id='search' placeholder="Search">
 <table class="table">
   <tr>
     <th>Link</th>
     <th>Edit</th>
     <th>Delete</th>
+    <th tspan='2'></th>
   </tr>
   <% @links.each do |link| %>
-    <tr data-id='<%= link.id %>' class='<%= link.read %>'>
+    <tr data-id='<%= link.id %>' data-title='<%= link.title %>' class='<%= link.read %> link'>
       <td><%= link_to link.title, link.url %></td>
       <td><%= link_to 'Edit', edit_link_path(link) %></td>
       <td><%= link_to 'Delete', link_path(link), method: 'delete' %></td>
